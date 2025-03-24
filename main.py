@@ -1,6 +1,6 @@
 import flet as ft
 import time
-from perguntas import perguntas_normais
+from perguntas import perguntas_facil, perguntas_normal, perguntas_dificil
 
 def main(page: ft.Page):
     page.title = "Quiz Game"
@@ -13,10 +13,16 @@ def main(page: ft.Page):
     page.bgcolor = ft.Colors.CYAN_ACCENT_200
 
     # Perguntas do quiz
-    perguntas = perguntas_normais
+    perguntas = perguntas_normal
 
     indice = 0
     score = 0
+    dificuldade_texto = ft.Text(
+        value="Dificuldade: Normal",
+        size=25,
+        color=ft.Colors.WHITE,
+        weight=ft.FontWeight.BOLD
+    )
 
     imagem = ft.Image(
         src=perguntas[indice]["imagem"],
@@ -69,7 +75,7 @@ def main(page: ft.Page):
         if e.control.text == perguntas[indice]["resposta"]:
             score += 1
             resultado_texto.value = "Resposta Certa!"
-            resultado_texto.color = ft.Colors.YELLOW
+            resultado_texto.color = ft.Colors.GREEN
         else:
             resultado_texto.value = "Resposta Errada!"
             resultado_texto.color = ft.Colors.RED_900
@@ -124,6 +130,7 @@ def main(page: ft.Page):
             ft.Row(
                 [
                     indice_texto,
+                    dificuldade_texto,
                     indice_score
                 ],
                 ft.MainAxisAlignment.SPACE_BETWEEN),
@@ -133,7 +140,7 @@ def main(page: ft.Page):
                     imagem,
                     ft.Container(height=5),
                     pergunta_texto,
-                    ft.Container(height=15),
+                    ft.Container(height=20),
                     *botoes,
                     ft.Container(height=4),
                     resultado_texto,
@@ -146,6 +153,7 @@ def main(page: ft.Page):
                 ft.ElevatedButton(
                     text="Reiniciar",
                     on_click=reiniciar,
+                    icon=ft.Icons.REFRESH,
                     height=50,
                     width=150,
                     bgcolor=ft.Colors.GREEN,
@@ -155,16 +163,41 @@ def main(page: ft.Page):
                 ft.ElevatedButton(
                     text="Voltar ao Menu",
                     on_click=voltar_ao_menu,
+                    icon=ft.Icons.ARROW_BACK,
                     height=50,
                     width=150,
                     bgcolor=ft.Colors.GREEN,
                     color=ft.Colors.WHITE,
                     elevation=4)
-                ],
-                ft.MainAxisAlignment.SPACE_BETWEEN,
-            )
+            ],
+            ft.MainAxisAlignment.SPACE_BETWEEN)
         )
+        proxima_pergunta()
 
+    def dificuldade_facil(e=None):
+        nonlocal perguntas, indice, score
+        indice = -1
+        score = 0
+        perguntas = perguntas_facil
+        dificuldade_texto.value = "Dificuldade: Fácil"
+        game(e)
+    
+    def dificuldade_normal(e=None):
+        nonlocal perguntas, indice, score
+        indice = -1
+        score = 0
+        perguntas = perguntas_normal
+        dificuldade_texto.value = "Dificuldade: Normal"
+        game(e)
+        
+    def dificuldade_dificil(e=None):
+        nonlocal perguntas, indice, score
+        indice = -1
+        score = 0
+        perguntas = perguntas_dificil
+        dificuldade_texto.value = "Dificuldade: Diffícil"
+        game(e)
+    
     def tela_inicial(e=None):
         page.clean()
         page.update()
@@ -183,11 +216,29 @@ def main(page: ft.Page):
                     ),
                     ft.Container(height=30),
                     ft.ElevatedButton(
-                        text="Começar",
-                        on_click=game,
+                        text="Dificuldade Fácil",
+                        on_click=dificuldade_facil,
                         height=50,
-                        width=150,
+                        width=200,
                         bgcolor=ft.Colors.GREEN,
+                        color=ft.Colors.WHITE,
+                        elevation=4),
+                    
+                    ft.ElevatedButton(
+                        text="Dificuldade Normal",
+                        on_click=dificuldade_normal,
+                        height=50,
+                        width=200,
+                        bgcolor=ft.Colors.ORANGE,
+                        color=ft.Colors.WHITE,
+                        elevation=4),
+                    
+                    ft.ElevatedButton(
+                        text="Dificuldade Difícil",
+                        on_click=dificuldade_dificil,
+                        height=50,
+                        width=200,
+                        bgcolor=ft.Colors.RED,
                         color=ft.Colors.WHITE,
                         elevation=4)
                 ],
