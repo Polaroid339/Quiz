@@ -2,6 +2,7 @@ import flet as ft
 import time
 from perguntas import perguntas_facil, perguntas_normal, perguntas_dificil
 
+
 def main(page: ft.Page):
     page.title = "Quiz Game"
 
@@ -170,7 +171,7 @@ def main(page: ft.Page):
                     color=ft.Colors.WHITE,
                     elevation=4)
             ],
-            ft.MainAxisAlignment.SPACE_BETWEEN)
+                ft.MainAxisAlignment.SPACE_BETWEEN)
         )
         proxima_pergunta()
 
@@ -181,7 +182,7 @@ def main(page: ft.Page):
         perguntas = perguntas_facil
         dificuldade_texto.value = "Dificuldade: Fácil"
         game(e)
-    
+
     def dificuldade_normal(e=None):
         nonlocal perguntas, indice, score
         indice = -1
@@ -189,7 +190,7 @@ def main(page: ft.Page):
         perguntas = perguntas_normal
         dificuldade_texto.value = "Dificuldade: Normal"
         game(e)
-        
+
     def dificuldade_dificil(e=None):
         nonlocal perguntas, indice, score
         indice = -1
@@ -197,7 +198,7 @@ def main(page: ft.Page):
         perguntas = perguntas_dificil
         dificuldade_texto.value = "Dificuldade: Diffícil"
         game(e)
-    
+
     def tela_inicial(e=None):
         page.clean()
         page.update()
@@ -210,10 +211,12 @@ def main(page: ft.Page):
                         size=30,
                         weight=ft.FontWeight.BOLD
                     ),
+
                     ft.Text(
                         "Responda as perguntas e veja quantas você acerta!",
                         size=20
                     ),
+
                     ft.Container(height=30),
                     ft.ElevatedButton(
                         text="Dificuldade Fácil",
@@ -223,7 +226,7 @@ def main(page: ft.Page):
                         bgcolor=ft.Colors.GREEN,
                         color=ft.Colors.WHITE,
                         elevation=4),
-                    
+
                     ft.ElevatedButton(
                         text="Dificuldade Normal",
                         on_click=dificuldade_normal,
@@ -232,7 +235,7 @@ def main(page: ft.Page):
                         bgcolor=ft.Colors.ORANGE,
                         color=ft.Colors.WHITE,
                         elevation=4),
-                    
+
                     ft.ElevatedButton(
                         text="Dificuldade Difícil",
                         on_click=dificuldade_dificil,
@@ -263,5 +266,6 @@ def main(page: ft.Page):
 
     tela_inicial()
     page.update()
+
 
 ft.app(target=main)
