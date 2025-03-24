@@ -92,8 +92,7 @@ def main(page: ft.Page):
             for botao in botoes:
                 if botao.text == perguntas[indice]["resposta"]:
                     botao.style = ft.ButtonStyle(
-                    side=ft.BorderSide(6, ft.colors.LIGHT_GREEN))
-
+                        side=ft.BorderSide(6, ft.colors.LIGHT_GREEN))
 
         indice_score.value = f"Score: {score}"
         page.update()
@@ -237,6 +236,12 @@ def main(page: ft.Page):
                     ft.Text(
                         "Responda as perguntas e veja quantas você acerta!",
                         size=20
+                    ),
+                    ft.Container(height=30),
+                    ft.Image(
+                        src="https://www.spotsound.fr/120315-home_default/gigante-mascote-bola-de-futebol-preto-e-branco.jpg",
+                        width=300,
+                        height=300
                     ),
 
                     ft.Container(height=30),
