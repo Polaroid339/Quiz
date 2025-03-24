@@ -73,17 +73,27 @@ def main(page: ft.Page):
 
     def verificar_resposta(e):
         nonlocal indice, score
+
+        for botao in botoes:
+            botao.disabled = True
+
         if e.control.text == perguntas[indice]["resposta"]:
             score += 1
+            e.control.bgcolor = ft.Colors.LIGHT_GREEN
             resultado_texto.value = "Resposta Certa!"
             resultado_texto.color = ft.Colors.GREEN
         else:
+            e.control.bgcolor = ft.Colors.RED_500
             resultado_texto.value = "Resposta Errada!"
             resultado_texto.color = ft.Colors.RED_900
 
+            for botao in botoes:
+                if botao.text == perguntas[indice]["resposta"]:
+                    botao.bgcolor = ft.Colors.LIGHT_GREEN
+
         indice_score.value = f"Score: {score}"
         page.update()
-        time.sleep(1.5)
+        time.sleep(2)
         proxima_pergunta()
 
     def reiniciar(e):
@@ -91,6 +101,7 @@ def main(page: ft.Page):
         indice = -1
         score = 0
         imagem.visible = True
+
         for botao in botoes:
             botao.visible = True
 
@@ -100,6 +111,10 @@ def main(page: ft.Page):
 
     def proxima_pergunta():
         nonlocal indice
+
+        for botao in botoes:
+            botao.disabled = False
+
         indice += 1
         if indice < len(perguntas):
             imagem.src = perguntas[indice]["imagem"]
@@ -107,6 +122,7 @@ def main(page: ft.Page):
             indice_texto.value = f"Pergunta {indice + 1}/{len(perguntas)}"
             for i, botao in enumerate(botoes):
                 botao.text = perguntas[indice]["alternativas"][i]
+                botao.bgcolor = ft.Colors.WHITE
         else:
             pergunta_texto.value = f"Fim do jogo! Pontuação: {score} certas de {len(perguntas)}"
             imagem.visible = False
