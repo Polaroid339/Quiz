@@ -11,7 +11,8 @@ def main(page: ft.Page):
     page.window.maximizable = False
     page.padding = 30
     page.theme_mode = ft.ThemeMode.LIGHT
-    page.bgcolor = ft.Colors.CYAN_ACCENT_400
+    page.bgcolor = ft.Colors.WHITE
+
 
     # Perguntas do quiz
     perguntas = perguntas_normal
@@ -21,7 +22,7 @@ def main(page: ft.Page):
     dificuldade_texto = ft.Text(
         value="Dificuldade: Normal",
         size=25,
-        color=ft.Colors.WHITE,
+        color=ft.Colors.BLUE,
         weight=ft.FontWeight.BOLD
     )
 
@@ -58,9 +59,9 @@ def main(page: ft.Page):
         text_size=18,
         text_align=ft.TextAlign.CENTER,
         border_width=2,
-        border_color=ft.Colors.WHITE,
+        border_color=ft.Colors.BLUE,
         border_radius=20,
-        text_style={"color": ft.Colors.WHITE, "weight": ft.FontWeight.BOLD},
+        text_style={"color": ft.Colors.BLUE, "weight": ft.FontWeight.BOLD},
     )
 
     indice_score = ft.TextField(
@@ -71,9 +72,9 @@ def main(page: ft.Page):
         text_size=18,
         text_align=ft.TextAlign.CENTER,
         border_width=2,
-        border_color=ft.Colors.WHITE,
+        border_color=ft.Colors.BLUE,
         border_radius=20,
-        text_style={"color": ft.Colors.WHITE, "weight": ft.FontWeight.BOLD}
+        text_style={"color": ft.Colors.BLUE, "weight": ft.FontWeight.BOLD}
     )
 
     botoes = []
@@ -135,7 +136,7 @@ def main(page: ft.Page):
                 botao.text = perguntas[indice]["alternativas"][i]
                 botao.bgcolor = ft.Colors.WHITE
                 botao.style = ft.ButtonStyle(
-                    side=ft.BorderSide(0, ft.colors.WHITE))
+                    side=ft.BorderSide(2, ft.colors.LIGHT_BLUE))
         else:
             pergunta_texto.value = f"Fim do jogo! Pontuação: {score} certas de {len(perguntas)}"
             imagem.visible = False
@@ -169,7 +170,7 @@ def main(page: ft.Page):
                 [
                     ft.Container(height=10),
                     imagem,
-                    ft.Container(height=5),
+                    ft.Container(height=10),
                     pergunta_texto,
                     ft.Container(height=20),
                     imagem_final,
