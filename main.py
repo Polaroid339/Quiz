@@ -11,7 +11,7 @@ def main(page: ft.Page):
     page.window.maximizable = False
     page.padding = 30
     page.theme_mode = ft.ThemeMode.LIGHT
-    page.bgcolor = ft.Colors.CYAN_ACCENT_200
+    page.bgcolor = ft.Colors.CYAN_ACCENT_400
 
     # Perguntas do quiz
     perguntas = perguntas_normal
@@ -41,6 +41,13 @@ def main(page: ft.Page):
         size=18,
         color=ft.Colors.GREEN,
         weight=ft.FontWeight.BOLD
+    )
+    
+    imagem_final = ft.Image(
+        src="https://www.cearasc.com/media/img/noticias/daronco_2.jpg",
+        width=500,
+        height=500,
+        visible=False
     )
 
     indice_texto = ft.TextField(
@@ -114,7 +121,8 @@ def main(page: ft.Page):
 
     def proxima_pergunta():
         nonlocal indice
-
+        imagem_final.visible = False
+        
         for botao in botoes:
             botao.disabled = False
 
@@ -131,6 +139,7 @@ def main(page: ft.Page):
         else:
             pergunta_texto.value = f"Fim do jogo! Pontuação: {score} certas de {len(perguntas)}"
             imagem.visible = False
+            imagem_final.visible = True
             for botao in botoes:
                 botao.visible = False
 
@@ -163,14 +172,14 @@ def main(page: ft.Page):
                     ft.Container(height=5),
                     pergunta_texto,
                     ft.Container(height=20),
-                    *botoes,
-                    ft.Container(height=4),
-                    resultado_texto,
-                    ft.Container(height=4)
+                    imagem_final,
+                    *botoes
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             ),
+            
+            ft.Container(height=40),
             ft.Row([
                 ft.ElevatedButton(
                     text="Reiniciar",
@@ -182,6 +191,8 @@ def main(page: ft.Page):
                     color=ft.Colors.WHITE,
                     elevation=4),
 
+                resultado_texto,
+                
                 ft.ElevatedButton(
                     text="Voltar ao Menu",
                     on_click=voltar_ao_menu,
