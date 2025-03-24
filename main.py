@@ -79,17 +79,21 @@ def main(page: ft.Page):
 
         if e.control.text == perguntas[indice]["resposta"]:
             score += 1
-            e.control.bgcolor = ft.Colors.LIGHT_GREEN
+            e.control.style = ft.ButtonStyle(
+                side=ft.BorderSide(6, ft.colors.LIGHT_GREEN))
             resultado_texto.value = "Resposta Certa!"
             resultado_texto.color = ft.Colors.GREEN
         else:
-            e.control.bgcolor = ft.Colors.RED_500
+            e.control.style = ft.ButtonStyle(
+                side=ft.BorderSide(6, ft.colors.RED_900))
             resultado_texto.value = "Resposta Errada!"
             resultado_texto.color = ft.Colors.RED_900
 
             for botao in botoes:
                 if botao.text == perguntas[indice]["resposta"]:
-                    botao.bgcolor = ft.Colors.LIGHT_GREEN
+                    botao.style = ft.ButtonStyle(
+                    side=ft.BorderSide(6, ft.colors.LIGHT_GREEN))
+
 
         indice_score.value = f"Score: {score}"
         page.update()
@@ -123,6 +127,8 @@ def main(page: ft.Page):
             for i, botao in enumerate(botoes):
                 botao.text = perguntas[indice]["alternativas"][i]
                 botao.bgcolor = ft.Colors.WHITE
+                botao.style = ft.ButtonStyle(
+                    side=ft.BorderSide(0, ft.colors.WHITE))
         else:
             pergunta_texto.value = f"Fim do jogo! Pontuação: {score} certas de {len(perguntas)}"
             imagem.visible = False
