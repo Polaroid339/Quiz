@@ -6,9 +6,8 @@ from perguntas import perguntas_facil, perguntas_normal, perguntas_dificil
 def main(page: ft.Page):
     page.title = "Quiz Game"
 
-    page.window.width = 1100
-    page.window.height = 870
-    page.window.maximizable = False
+    page.window.width = 700
+    page.window.height = 770
     page.padding = 30
     page.theme_mode = ft.ThemeMode.LIGHT
     page.bgcolor = ft.Colors.WHITE
@@ -28,8 +27,8 @@ def main(page: ft.Page):
 
     imagem = ft.Image(
         src=perguntas[indice]["imagem"],
-        width=350,
-        height=250
+        width=300,
+        height=200
     )
 
     pergunta_texto = ft.Text(
@@ -46,8 +45,8 @@ def main(page: ft.Page):
     
     imagem_final = ft.Image(
         src="https://www.cearasc.com/media/img/noticias/daronco_2.jpg",
-        width=500,
-        height=500,
+        width=400,
+        height=400,
         visible=False
     )
 
@@ -168,11 +167,11 @@ def main(page: ft.Page):
                 ft.MainAxisAlignment.SPACE_BETWEEN),
             ft.Column(
                 [
-                    ft.Container(height=10),
+                    ft.Container(height=5),
                     imagem,
-                    ft.Container(height=10),
+                    ft.Container(height=5),
                     pergunta_texto,
-                    ft.Container(height=20),
+                    ft.Container(height=10),
                     imagem_final,
                     *botoes
                 ],
@@ -180,7 +179,7 @@ def main(page: ft.Page):
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             ),
             
-            ft.Container(height=40),
+            ft.Container(height=15),
             ft.Row([
                 ft.ElevatedButton(
                     text="Reiniciar",
@@ -238,7 +237,7 @@ def main(page: ft.Page):
         page.add(
             ft.Column(
                 [
-                    ft.Container(height=50),
+                    ft.Container(height=20),
                     ft.Text(
                         "Bem-vindo ao Quiz Game!",
                         size=30,
@@ -256,7 +255,7 @@ def main(page: ft.Page):
                         height=300
                     ),
 
-                    ft.Container(height=30),
+                    ft.Container(height=15),
                     ft.ElevatedButton(
                         text="Dificuldade Fácil",
                         on_click=dificuldade_facil,
